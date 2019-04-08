@@ -1,28 +1,46 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { Component } from 'react'
+import './App.css'
+import axios from 'axios'
 class App extends Component {
-  render() {
+
+  constructor (props) {
+    super(props) 
+    this.state = {showUserInfos: false}
+    this.state = {userInfos: false}
+    this.handleClick = this.handleClick.bind(this)
+  
+  }
+  
+
+  handleClick () {
+    axios.get('http://localhost:4000/users')
+      .then((response) => {
+        this.setState({userInfos: response.data})
+        this.setState({showUserInfos: true})
+      })
+  }
+
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className='button__container'>
+        { this.state.showUserInfos ? 
+          <UserInfos userInfos={this.state.userInfos}/> : null }
+          
+        { !this.state.showUserInfos ?  
+          <button className='button' onClick={this.handleClick}>Click Me</button>: null }
+    
       </div>
-    );
+    )
   }
 }
 
-export default App;
+const UserInfos = (props) => {
+  console.log(props)
+  return (
+    <div className='user_infos_container'>
+      <h2>Name: {props.userInfos.name}</h2>
+      <h2>Age: {props.userInfos.age}</h2>
+    </div>
+  );
+}
+export default App
