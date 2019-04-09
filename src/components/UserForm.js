@@ -14,12 +14,9 @@ class UserForm extends React.Component {
       this.setState(event.target.name === 'name' ? {name: event.target.value} : {age : event.target.value} )
     }
   
-    handleSubmit(event) {
-        axios.post('http://localhost:4000/users' ,this.state).then((response) => {
-            console.log(response)
-        })
-  
+    async handleSubmit(event) {
       event.preventDefault()
+      const response = await axios.post('http://localhost:4000/users' ,this.state)
     }
   
     render() {
