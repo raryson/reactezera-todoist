@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
+import UserForm from './components/UserForm' 
 import axios from 'axios'
 class App extends Component {
 
@@ -24,23 +25,27 @@ class App extends Component {
     return (
       <div className='button__container'>
         { this.state.showUserInfos ? 
-          <UserInfos userInfos={this.state.userInfos}/> : null }
-          
-        { !this.state.showUserInfos ?  
-          <button className='button' onClick={this.handleClick}>Click Me</button>: null }
-    
+          <RenderUserInfos userInfos={this.state.userInfos}/> : 
+          <button className='button' onClick={this.handleClick}>Click Me</button> }
+          <UserForm/>
       </div>
     )
   }
 }
 
-const UserInfos = (props) => {
-  console.log(props)
+const RenderUserInfos = (props) => {
+  const usersInfos = props.userInfos.map((user, index) => {
+    return <div className='user_infos' key={index}>
+      <h2>Name: {user.name}</h2>
+      <h2>Age: {user.age}</h2>
+    </div>
+  })
+
   return (
     <div className='user_infos_container'>
-      <h2>Name: {props.userInfos.name}</h2>
-      <h2>Age: {props.userInfos.age}</h2>
+        { usersInfos }
     </div>
   );
 }
+
 export default App
