@@ -15,6 +15,7 @@ app.get('/users', (req, res) => {
 
 app.post('/users', (req, res) => {
     createUser(req.body.name, req.body.age)
+    console.log(database)
     res.status(200).send()
 })
 

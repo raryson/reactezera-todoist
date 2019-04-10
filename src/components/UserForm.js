@@ -5,7 +5,6 @@ class UserForm extends React.Component {
     constructor(props) {
       super(props)
       this.state = {name: '', age: 0}
-  
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -17,6 +16,10 @@ class UserForm extends React.Component {
     async handleSubmit(event) {
       event.preventDefault()
       const response = await axios.post('http://localhost:4000/users' ,this.state)
+      if(response.status === 200) {
+        const newState = this.props.todoIst.userInfos.push(this.state)
+        this.props.handleCallbackFromForm(newState)
+      }
     }
   
     render() {

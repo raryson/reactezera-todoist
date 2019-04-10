@@ -6,13 +6,19 @@ class App extends Component {
 
   constructor (props) {
     super(props) 
+    this.handleCallbackFromForm = this.handleCallbackFromForm.bind(this)
+    this.state = {userInfos: []}
+  }
+
+  handleCallbackFromForm = () => {
+    this.setState(this.state)
   }
   
   render () {
     return (
       <div className='button__container'>
-          <UserInfos/>
-          <UserForm/>
+          <UserInfos todoIst={this.state} />
+          <UserForm todoIst={this.state} handleCallbackFromForm={this.handleCallbackFromForm} />
       </div>
     )
   }
