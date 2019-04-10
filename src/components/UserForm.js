@@ -15,9 +15,9 @@ class UserForm extends React.Component {
   
     async handleSubmit(event) {
       event.preventDefault()
-      const response = await axios.post('http://localhost:4000/users' ,this.state)
+      const response = await axios.post('http://localhost:4000/users' , this.state)
       if(response.status === 200) {
-        const newState = this.props.todoIst.userInfos.push(this.state)
+        const newState = this.props.todoIst.userInfos.push(response.data)
         this.props.handleCallbackFromForm(newState)
       }
     }
@@ -33,7 +33,7 @@ class UserForm extends React.Component {
             Age:
             <input type="text" value={this.state.age} name="age" onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Submit" />
+          <input className="button" type="submit" value="Submit" />
         </form>
       )
     }

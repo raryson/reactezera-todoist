@@ -6,13 +6,34 @@ class UserInfos extends React.Component {
         super(props)
     }
 
+    deleteUser = (id) => {
+      const searchedUserIndex = this.findUserIndexById(id)
+      this.props.todoIst.userInfos.splice(searchedUserIndex, 1)
+      this.setState({userInfos: this.props.todoIst.userInfos})
+    }
+  
+    findUserIndexById = (id) => {
+      let findedUserId = null
+      this.props.todoIst.userInfos.forEach((user, index) => {
+          if (user.id == id ) findedUserId = index
+      })
+
+      return findedUserId
+    }
+
     addNewUser = (users) => {
-      return users.map((user, index) => {
-        return <div className='user_infos' key={index}>
+      return users.map((user) => {
+        return <div className='user_infos' key={user.id}>
           <h2>Name: {user.name}</h2>
           <h2>Age: {user.age}</h2>
+          <button className="button" id={user.id} onClick={this.handleDelete} >Delete</button>
         </div>
       })
+    }
+
+   handleDelete = async (event) => {
+      const response = await axios.delete(`http://localhost:4000/users?id=${event.target.id}`)
+      this.deleteUser(response.data)
     }
     
     

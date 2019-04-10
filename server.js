@@ -16,13 +16,14 @@ app.get('/users', (req, res) => {
 })
 
 app.post('/users', (req, res) => {
-    createUser(req.body.name, req.body.age)
-    res.status(200).send()
+    const createdUserId = createUser(req.body.name, req.body.age)
+    res.status(200)
+    res.json(findUserById(createdUserId))
 })
 
 app.delete('/users', (req, res) => {
-    deleteUser(req.body.id)
-    res.status(200).send()
+    res.status(200)
+    res.json(deleteUser(req.query.id))
 })
 
 app.listen(4000, () => {
@@ -30,17 +31,29 @@ app.listen(4000, () => {
 })
 
 const deleteUser = (id) => {
-    const searchedUser = findUserById(id)
-    database.users.splice(searchedUser, 1)
+    const searchedUserIndex = findUserIndexById(id)
+    database.users.splice(searchedUserIndex, 1)
+    return id
 }
 
 const findUserById = (id) => {
-    database.users.filter((user) => {
-        return user.id === id
+    return database.users.find((user) => {
+        if (user.id == id ) return user
+        
     })
+}
+
+const findUserIndexById = (id) => {
+    let findedUserId = null
+    database.users.forEach((user, index) => {
+        if (user.id == id ) findedUserId = index
+    })
+
+    return findedUserId
 }
 
 const createUser = (name, age) => {
     database.users.push({id, name, age})
-    this.id++
+    id++
+    return id-1
 }
