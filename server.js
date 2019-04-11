@@ -9,51 +9,51 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-const database = { users: []}
+const database = { ists: []}
 
-app.get('/users', (req, res) => {
-    res.json(database.users)
+app.get('/ists', (req, res) => {
+    res.json(database.ists)
 })
 
-app.post('/users', (req, res) => {
-    const createdUserId = createUser(req.body.name, req.body.age)
+app.post('/ists', (req, res) => {
+    const createdIstId = createIst(req.body.ist)
     res.status(200)
-    res.json(findUserById(createdUserId))
+    res.json(findIstById(createdIstId))
 })
 
-app.delete('/users', (req, res) => {
+app.delete('/ists', (req, res) => {
     res.status(200)
-    res.json(deleteUser(req.query.id))
+    res.json(deleteIst(req.query.id))
 })
 
 app.listen(4000, () => {
     console.log('app running on 4000')
 })
 
-const deleteUser = (id) => {
-    const searchedUserIndex = findUserIndexById(id)
-    database.users.splice(searchedUserIndex, 1)
+const deleteIst = (id) => {
+    const searchedIstIndex = findIstIndexById(id)
+    database.ists.splice(searchedIstIndex, 1)
     return id
 }
 
-const findUserById = (id) => {
-    return database.users.find((user) => {
-        if (user.id == id ) return user
+const findIstById = (id) => {
+    return database.ists.find((ist) => {
+        if (ist.id == id ) return ist
         
     })
 }
 
-const findUserIndexById = (id) => {
-    let findedUserId = null
-    database.users.forEach((user, index) => {
-        if (user.id == id ) findedUserId = index
+const findIstIndexById = (id) => {
+    let findedIstId = null
+    database.ists.forEach((ist, index) => {
+        if (ist.id == id ) findedIstId = index
     })
 
-    return findedUserId
+    return findedIstId
 }
 
-const createUser = (name, age) => {
-    database.users.push({id, name, age})
+const createIst = (ist) => {
+    database.ists.push({id, message: ist})
     id++
     return id-1
 }
