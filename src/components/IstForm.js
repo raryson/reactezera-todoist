@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Scroll from 'react-scroll'
 
 class IstForm extends React.Component {
     constructor(props) {
@@ -20,16 +21,17 @@ class IstForm extends React.Component {
         const newState = this.props.todoIst.ists.push(response.data)
         this.props.handleCallbackFromForm(newState)
       }
+      Scroll.animateScroll.scrollToBottom()
     }
   
     render() {
       return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="ist_form">
           <label>
             What I need to do later?
             <input type="text" value={this.state.ist} name="ist" onChange={this.handleChange} />
           </label>
-          <input className="button" type="submit" value="Submit" />
+          <input className="button" type="submit" name="submit" value="Submit" />
         </form>
       )
     }

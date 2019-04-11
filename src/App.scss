@@ -1,0 +1,45 @@
+.button_container {
+  margin-top: 200px;
+  text-align: center;
+}
+
+.ist_form {
+  margin-bottom: 40vh;
+}
+
+.greetings {
+  height: 100vh;
+}
+
+$url: "https://media.giphy.com/media/11hEdGzcUswSEU/giphy.gif";
+
+.clip-text {
+  padding:10px;
+  background: url($url);
+  background-size: cover;
+  -webkit-background-clip: text;
+  color: #00000047; 
+  text-transform:uppercase;
+  font-size: 8rem;
+  font-weight: 900;
+  line-height: 80%;
+  letter-spacing:-10px 0px;
+  user-select:none;
+      border-top: solid 10px #00000057;
+    border-bottom: solid 10px #00000057;
+  text-align:center;
+}
+
+.button {
+  background-color:green;
+  border: none;
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  width: 200px;
+  margin: 5px;
+}
+h2 {
+  display: inline;
+  margin: 5px;
+}

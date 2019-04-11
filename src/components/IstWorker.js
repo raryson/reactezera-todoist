@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Scroll from 'react-scroll'
 
-class UserInfos extends React.Component {
+class IstWorker extends React.Component {
   constructor (props) {
         super(props)
     }
@@ -47,11 +48,11 @@ class UserInfos extends React.Component {
         const istsInfos = this.addNewIst(this.props.todoIst.ists)
       
         return (
-          <div className='user_infos_container'>
+          <div className='ist_infos_container'>
               { istsInfos }
           </div>
         );
     }
 }
 
-export default UserInfos
+export default IstWorker
